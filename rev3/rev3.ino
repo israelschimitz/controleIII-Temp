@@ -30,7 +30,7 @@ void establishContact();
 int transformar(int leituraa);
 
 /// Pino de comando do relé de estado sólido ///
-const int saida = 7;
+int saida = 3;
 
 /// Setup ///
 void setup() {
@@ -39,7 +39,7 @@ void setup() {
   pinMode(saida, OUTPUT);
   //establishContact();
   
-  //LCD
+//LCD
   lcd.begin(16, 2);             // LCD - configura o número de colunas e linhas 
   lcd.clear();                  // limpa display LCD
 
@@ -74,8 +74,7 @@ void loop() {
   ref=80;
   ligado=1; 
 ///-------------apagar--------------
-
-     
+ 
     if(ligado > 0){
 
         int temperatura = analogRead(A8);   /// Leitura da temperatura e conversão para ºC ///
@@ -125,7 +124,7 @@ void loop() {
 
         signed int potencia = (int)Iy;
         int pot_positiva = 0;
-        unsigned int potencia1 = 0;
+        int potencia1 = 0;
         if( potencia >= 0){
             pot_positiva = potencia;
             potencia1 = map(potencia,0,800,0,255); /// Ajuste entre a potência do atuador
@@ -133,25 +132,10 @@ void loop() {
             potencia1 = 0;
             pot_positiva = 0;
             }
-            
-         analogWrite(saida, potencia1);   
-            
-/* - PWM na mão
-        unsigned long agora = millis();
-        unsigned long tempo = agora + potencia1;
-        unsigned long agora1 = agora;
-        while(agora1 < tempo){
-            agora1 = millis();
-            digitalWrite(saida, HIGH);
-        }
-        unsigned long agora2 = agora + 1000;
-        while(agora2 >= agora1){
-            agora1 = millis();
-            digitalWrite(saida, LOW);
-        }
-        
-        */
 
+     analogWrite(saida, potencia1);   
+       
+            
         long valor = 0;
         valor = (long)pot_positiva;
        
